@@ -152,5 +152,46 @@ void display(const char board[][BOARD_SIZE])
  *******************************************/
 bool didWin(const char board[][BOARD_SIZE], char turn)
 {
+   for (int r = 0; r < BOARD_SIZE; r++)
+   {
+      bool hadWon = true;
+      for (int c = 0; c < BOARD_SIZE; c++)
+      {
+          if (board[r][c] != turn) hadWon = false;
+      }
+      //check if this row had or had not won;
+      //Hooray, we had found the winning column!
+      if(hadWon==true) return true;
+      // continue
+   }
+   //Same for rows
+
+   for (int c = 0; c < BOARD_SIZE; c++)
+   {
+      bool hadWon = true;
+      for (int r = 0; r < BOARD_SIZE; r++)
+      {
+          if (board[r][c] != turn) hadWon = false;
+      }
+      //check if this column had or had not won;
+      //Hooray, we had found the winning row!
+      if(hadWon==true) return true;
+      // continue
+   }
+   bool hadWon = true;
+   //Check diagonal 0,0 - 1,1 - 2-2 etc
+   for (int d = 0; d < BOARD_SIZE; d++)
+   {
+      if (board[d][d] != turn) hadWon = false;
+   }
+   if(hadWon==true) return true;
+   hadWon = true;
+   //Check diagonal 0,0 - 1,1 - 2-2 etc
+   for (int d = 0; d < BOARD_SIZE; d++)
+   {
+      if (board[d][BOARD_SIZE - d - 1] != turn) hadWon = false;
+   }
+   if(hadWon==true) return true;
+   
    return false;
 }
